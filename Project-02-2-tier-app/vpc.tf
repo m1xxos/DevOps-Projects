@@ -21,6 +21,7 @@ resource "yandex_vpc_subnet" "app-d" {
   network_id     = yandex_vpc_network.project.id
   v4_cidr_blocks = ["172.16.0.0/16"]
   zone           = local.zone
+  route_table_id = yandex_vpc_route_table.nat-instance-route.id
 }
 
 resource "yandex_vpc_security_group" "nat-instance-sg" {
