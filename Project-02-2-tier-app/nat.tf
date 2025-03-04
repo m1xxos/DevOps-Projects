@@ -39,3 +39,12 @@ resource "yandex_compute_instance" "nat-instance" {
     user-data = "#cloud-config\nusers:\n  - name: ${local.vm_user_nat}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh-authorized-keys:\n      - ${file("${local.ssh_key_path}")}"
   }
 }
+
+resource "yandex_vpc_route_table" "nat-instance-route" {
+  name       = "nat-instance-route"
+  network_id = yandex_vpc_network.project.id
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    next_hop_address   = yandex_compute_instance.nat-instance.network_interface.0.ip_address
+  }
+}
