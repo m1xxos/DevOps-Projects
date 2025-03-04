@@ -13,14 +13,14 @@ resource "yandex_vpc_subnet" "bastion-d" {
   name = "bastion-ru-central1-d"
   network_id = yandex_vpc_network.project.id
   v4_cidr_blocks = [ "192.168.0.0/16" ]
-  zone = "ru-central1-d"
+  zone = local.zone
 }
 
 resource "yandex_vpc_subnet" "app-d" {
   name = "app-ru-central1-d"
   network_id = yandex_vpc_network.project.id
   v4_cidr_blocks = [ "172.16.0.0/16" ]
-  zone = "ru-central1-d"
+  zone = local.zone
 }
 
 resource "yandex_vpc_security_group" "nat-instance-sg" {
