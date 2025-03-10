@@ -14,6 +14,9 @@ resource "yandex_compute_instance_group" "app" {
     boot_disk {
       disk_id = yandex_compute_disk.app-disk.id
     }
+    network_settings {
+      type = "STANDARD"
+    }
 
   }
   scale_policy {
