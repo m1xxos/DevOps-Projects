@@ -1,0 +1,12 @@
+services:
+  redis-node-1:
+    image: redis:7.4
+    container_name: redis-nodes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes
+
+volumes:
+  redis-data:

@@ -1,0 +1,16 @@
+- name: Redis config
+  hosts: all
+  become: true
+
+  roles:
+    - geerlingguy.docker
+
+  tasks:
+    - name: Copy docker compose
+      ansible.builtin.copy:
+        src: files/compose.yaml
+        dest: /home/ubuntu/compose.yaml
+
+    - name: Docker compose up
+      ansible.builtin.command:
+        cmd: docker compose -f /home/ubuntu/compose.yaml up -d
