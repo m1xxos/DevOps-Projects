@@ -5,6 +5,6 @@ resource "yandex_kms_symmetric_key" "vault-key" {
 }
 
 output "key" {
-  value = yandex_iam_service_account_key.vault-sa-key.private_key
+  value = yandex_iam_service_account_key.vault-sa-key.public_key
   sensitive = true
 }

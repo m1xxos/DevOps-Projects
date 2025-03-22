@@ -71,6 +71,10 @@ resource "yandex_kubernetes_node_group" "gitlab-node-group" {
     scheduling_policy {
       preemptible = true
     }
+
+    metadata = {
+      "ssh-keys" : "m1xxos:${file("~/.ssh/id_rsa.pub")}"
+    }
   }
 
   scale_policy {
@@ -91,4 +95,10 @@ resource "yandex_kubernetes_node_group" "gitlab-node-group" {
     }
   }
 
+}
+
+data "yandex_client_config" "client" {}
+
+data "yandex_kubernetes_cluster" "gitlab-cluster" {
+  name = yandex_kubernetes_cluster.gitlab-cluster.name
 }
