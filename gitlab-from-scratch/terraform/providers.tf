@@ -4,6 +4,14 @@ terraform {
       source  = "yandex-cloud/yandex"
       version = "0.139.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "3.0.0-pre2"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.35.1"
+    }
   }
   required_version = ">= 0.13"
   backend "s3" {
@@ -25,4 +33,18 @@ provider "yandex" {
   token     = var.token
   folder_id = var.folder_id
   cloud_id  = var.cloud_id
+}
+
+provider "helm" {
+  kubernetes = {
+    host                   = data.yandex_kubernetes_cluster.gitlab-cluster.master.0.external_v4_endpoint
+    cluster_ca_certificate = data.yandex_kubernetes_cluster.gitlab-cluster.master.0.cluster_ca_certificate
+    token                  = data.yandex_client_config.client.iam_token
+  }
+}
+
+provider "kubernetes" {
+  host                   = data.yandex_kubernetes_cluster.gitlab-cluster.master.0.external_v4_endpoint
+  cluster_ca_certificate = data.yandex_kubernetes_cluster.gitlab-cluster.master.0.cluster_ca_certificate
+  token                  = data.yandex_client_config.client.iam_token
 }
