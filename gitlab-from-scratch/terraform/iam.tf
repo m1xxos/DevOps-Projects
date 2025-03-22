@@ -53,5 +53,5 @@ resource "yandex_resourcemanager_folder_iam_binding" "name" {
 }
 
 resource "yandex_iam_service_account_key" "vault-sa-key" {
-  service_account_id = yandex_iam_service_account.vault-kms
+  service_account_id = yandex_iam_service_account.vault-kms.id
 }
