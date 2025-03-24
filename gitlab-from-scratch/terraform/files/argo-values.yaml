@@ -5,6 +5,3 @@ configs:
       type: git
       url: https://github.com/m1xxos/DevOps-Projects.git
       username: argo-cd
-  cm:
-    accounts:
-      m1xxos: "apiKey, logins"

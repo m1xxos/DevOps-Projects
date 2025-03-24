@@ -12,3 +12,7 @@ variable "cloud_id" {
   type      = string
   sensitive = true
 }
+
+variable "argo_token" {
+  type = string
+}

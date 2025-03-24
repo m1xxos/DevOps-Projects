@@ -53,6 +53,8 @@ provider "kubernetes" {
   token                  = data.yandex_client_config.client.iam_token
 }
 
-# provider "argocd" {
-
-# }
+provider "argocd" {
+  username     = "m1xxos"
+  auth_token   = var.argo_token
+  port_forward = true
+}
