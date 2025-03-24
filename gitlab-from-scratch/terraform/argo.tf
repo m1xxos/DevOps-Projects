@@ -46,8 +46,14 @@ resource "argocd_application_set" "helm-apps" {
       list {
         elements = [
           {
-            repo = "https://traefik.github.io/traefik-helm-chart"
+            repo = "https://traefik.github.io/charts"
             name = "traefik"
+            target_revision = "34.4.1"
+          },
+          {
+            repo = "https://prometheus-community.github.io/helm-charts"
+            name = "prometheus-community"
+            target_revision = "27.7.0"
           }
         ]
       }
@@ -60,6 +66,7 @@ resource "argocd_application_set" "helm-apps" {
         source {
           repo_url = "{{repo}}"
           chart    = "{{name}}"
+          target_revision = "{{target_revision}}"
         }
         destination {
           server    = "https://kubernetes.default.svc"
