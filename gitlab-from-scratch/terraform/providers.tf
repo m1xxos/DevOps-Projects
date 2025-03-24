@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "2.35.1"
     }
+    argocd = {
+      source  = "argoproj-labs/argocd"
+      version = "7.5.0"
+    }
   }
   required_version = ">= 0.13"
   backend "s3" {
@@ -48,3 +52,7 @@ provider "kubernetes" {
   cluster_ca_certificate = data.yandex_kubernetes_cluster.gitlab-cluster.master.0.cluster_ca_certificate
   token                  = data.yandex_client_config.client.iam_token
 }
+
+# provider "argocd" {
+
+# }

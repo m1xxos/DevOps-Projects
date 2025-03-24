@@ -1,6 +1,14 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/argoproj-labs/argocd" {
+  version     = "7.5.0"
+  constraints = "7.5.0"
+  hashes = [
+    "h1:d1ZA0Mwv0WCE/K3oGTjsxMQg+uRsnbjeZbnrR8W5SkA=",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/helm" {
   version     = "3.0.0-pre2"
   constraints = "3.0.0-pre2"
