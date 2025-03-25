@@ -61,7 +61,7 @@ resource "argocd_application_set" "helm-apps" {
           path            = "gitlab-from-scratch/charts/{{path.basename}}"
           target_revision = "HEAD"
           helm {
-            value_files = [ "gitlab-from-scratch/values/{{path.basename}}.yaml" ]
+            value_files = [ "../values/{{path.basename}}.yaml" ]
           }
         }
         destination {
