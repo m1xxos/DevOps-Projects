@@ -18,7 +18,7 @@ resource "kubernetes_config_map_v1_data" "argo-user" {
   force = true
   metadata {
     name      = "argocd-cm"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata[0].name
   }
   data = {
     "accounts.m1xxos" = "apiKey, login"
@@ -29,7 +29,7 @@ resource "kubernetes_config_map_v1_data" "argo-admin" {
   force = true
   metadata {
     name      = "argocd-rbac-cm"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata[0].name
   }
   data = {
     "policy.csv" = "g, m1xxos, role:admin"
@@ -39,15 +39,15 @@ resource "kubernetes_config_map_v1_data" "argo-admin" {
 resource "argocd_application_set" "helm-apps" {
   metadata {
     name      = "helm-apps"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata[0].name
   }
   spec {
     generator {
       git {
-        repo_url = "https://github.com/m1xxos/DevOps-Projects.git"
+        repo_url = var.repo_url
         revision = "HEAD"
         directory {
-          path = "gitlab-from-scratch/argo/charts/*"
+          path = "${var.charts_path}/*"
         }
       }
     }
@@ -57,8 +57,8 @@ resource "argocd_application_set" "helm-apps" {
       }
       spec {
         source {
-          repo_url        = "https://github.com/m1xxos/DevOps-Projects.git"
-          path            = "gitlab-from-scratch/argo/charts/{{path.basename}}"
+          repo_url        = var.repo_url
+          path            = "${var.charts_path}/{{path.basename}}"
           target_revision = "HEAD"
           helm {
             value_files = ["../../values/{{path.basename}}.yaml"]
