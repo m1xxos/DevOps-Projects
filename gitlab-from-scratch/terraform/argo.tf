@@ -43,6 +43,13 @@ resource "argocd_application_set" "helm-apps" {
   }
   spec {
     generator {
+      git {
+        repo_url = "https://github.com/m1xxos/DevOps-Projects.git"
+        revision = "HEAD"
+        directory {
+          path = "gitlab-from-scratch/charts/*"
+        }
+      }
       list {
         elements = [
           {
@@ -60,17 +67,17 @@ resource "argocd_application_set" "helm-apps" {
     }
     template {
       metadata {
-        name = "{{name}}"
+        name = "{{path.basename}}"
       }
       spec {
         source {
-          repo_url = "{{repo}}"
-          chart    = "{{name}}"
-          target_revision = "{{target_revision}}"
+          repo_url = "https://github.com/m1xxos/DevOps-Projects.git"
+          chart    = "gitlab-from-scratch/charts/{{path.basename}}"
+          target_revision = "HEAD"
         }
         destination {
           server    = "https://kubernetes.default.svc"
-          namespace = "{{name}}"
+          namespace = "{{path.basename}}"
         }
         sync_policy {
           automated {
