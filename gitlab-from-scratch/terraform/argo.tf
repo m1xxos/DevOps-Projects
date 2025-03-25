@@ -57,8 +57,8 @@ resource "argocd_application_set" "helm-apps" {
       }
       spec {
         source {
-          repo_url = "https://github.com/m1xxos/DevOps-Projects.git"
-          chart    = "gitlab-from-scratch/charts/{{path.basename}}"
+          repo_url        = "https://github.com/m1xxos/DevOps-Projects.git"
+          path            = "gitlab-from-scratch/charts/{{path.basename}}"
           target_revision = "HEAD"
         }
         destination {
