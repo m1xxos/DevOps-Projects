@@ -60,6 +60,9 @@ resource "argocd_application_set" "helm-apps" {
           repo_url        = "https://github.com/m1xxos/DevOps-Projects.git"
           path            = "gitlab-from-scratch/charts/{{path.basename}}"
           target_revision = "HEAD"
+          helm {
+            value_files = [ "gitlab-from-scratch/values/{{path.basename}}.yaml" ]
+          }
         }
         destination {
           server    = "https://kubernetes.default.svc"

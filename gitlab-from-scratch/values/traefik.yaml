@@ -1,0 +1,3 @@
+service:
+  spec:
+    loadBalancerIP: "1.1.1.1"
