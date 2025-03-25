@@ -50,20 +50,6 @@ resource "argocd_application_set" "helm-apps" {
           path = "gitlab-from-scratch/charts/*"
         }
       }
-      list {
-        elements = [
-          {
-            repo = "https://traefik.github.io/charts"
-            name = "traefik"
-            target_revision = "34.4.1"
-          },
-          {
-            repo = "https://prometheus-community.github.io/helm-charts"
-            name = "prometheus-community"
-            target_revision = "27.7.0"
-          }
-        ]
-      }
     }
     template {
       metadata {
