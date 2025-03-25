@@ -58,10 +58,10 @@ resource "argocd_application_set" "helm-apps" {
       spec {
         source {
           repo_url        = "https://github.com/m1xxos/DevOps-Projects.git"
-          path            = "gitlab-from-scratch/charts/{{path.basename}}"
+          path            = "gitlab-from-scratch/argo/charts/{{path.basename}}"
           target_revision = "HEAD"
           helm {
-            value_files = [ "../values/{{path.basename}}.yaml" ]
+            value_files = ["../../values/{{path.basename}}.yaml"]
           }
         }
         destination {
