@@ -10,6 +10,13 @@ resource "yandex_vpc_network" "gitlab" {
   name = "gitlab"
 }
 
+resource "yandex_vpc_address" "traefik-address" {
+  name = "traefik-address"
+  external_ipv4_address {
+    zone_id = "ru-central1-d"
+  }
+}
+
 resource "yandex_vpc_subnet" "gitlab-ru-central1-a" {
   name           = "gitlab-ru-central1-a"
   zone           = "ru-central1-a"
