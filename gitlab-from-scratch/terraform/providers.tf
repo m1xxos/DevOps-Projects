@@ -16,6 +16,14 @@ terraform {
       source  = "argoproj-labs/argocd"
       version = "7.5.0"
     }
+    vault = {
+      source  = "hashicorp/vault"
+      version = "4.7.0"
+    }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "5.2.0"
+    }
   }
   required_version = ">= 0.13"
   backend "s3" {

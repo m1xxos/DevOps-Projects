@@ -9,6 +9,14 @@ provider "registry.terraform.io/argoproj-labs/argocd" {
   ]
 }
 
+provider "registry.terraform.io/cloudflare/cloudflare" {
+  version     = "5.2.0"
+  constraints = "5.2.0"
+  hashes = [
+    "h1:5jsxVZa5nYIKUB+JjLbk+2x6az6XRmBg6mSql6aTP3U=",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/helm" {
   version     = "3.0.0-pre2"
   constraints = "3.0.0-pre2"
@@ -22,6 +30,14 @@ provider "registry.terraform.io/hashicorp/kubernetes" {
   constraints = "2.35.1"
   hashes = [
     "h1:zgXeWvp4//Ry+4glwNrLMpPFOU8QBQlARNmR9WCNe9o=",
+  ]
+}
+
+provider "registry.terraform.io/hashicorp/vault" {
+  version     = "4.7.0"
+  constraints = "4.7.0"
+  hashes = [
+    "h1:6LHoYgrQI2EcqqtrvdbrCY7KqSc5HwWXKBVN0k5wIdc=",
   ]
 }
 
