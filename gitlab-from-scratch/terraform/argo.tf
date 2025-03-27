@@ -36,6 +36,23 @@ resource "kubernetes_config_map_v1_data" "argo-admin" {
   }
 }
 
+resource "argocd_application" "configs" {
+  metadata {
+    name = "configs"
+    namespace = kubernetes_namespace.argocd.metadata[0].name
+  }
+  spec {
+    source {
+      repo_url = var.repo_url
+      path = "gitlab-from-scratch/argo/configs"
+    }
+    destination {
+      server    = "https://kubernetes.default.svc"
+    }
+  }
+}
+
+
 resource "argocd_application_set" "helm-apps" {
   metadata {
     name      = "helm-apps"
