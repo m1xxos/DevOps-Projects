@@ -26,3 +26,13 @@ variable "charts_path" {
   type    = string
   default = "gitlab-from-scratch/argo/charts"
 }
+
+variable "cloudflare_zone_id" {
+  type = string
+  sensitive = true
+}
+
+variable "cloudflare_api_token" {
+  type = string
+  sensitive = true
+}

@@ -66,3 +66,7 @@ provider "argocd" {
   auth_token   = var.argo_token
   port_forward = true
 }
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
