@@ -1,0 +1,14 @@
+IngreapiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vault-ingress
+  namespace: vault
+spec:
+  entryPoints:
+  - web
+  routes:
+  - match: Host(`vault.gitlab.m1xxos.tech`)
+    kind: Rule
+    services:
+    - name: vault
+      namespace: vault
