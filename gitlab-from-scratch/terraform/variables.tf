@@ -38,20 +38,20 @@ variable "cloudflare_api_token" {
 }
 
 variable "main_domain" {
-  type = string
+  type    = string
   default = "gitlab.m1xxos.tech"
 }
 
-variable vault_login_username {
-  type = string
+variable "vault_login_username" {
+  type    = string
   default = "m1xxos"
 }
-variable vault_login_password {
-  type = string
+variable "vault_login_password" {
+  type      = string
   sensitive = true
 }
 
 variable "vault_url" {
-  type = string
+  type    = string
   default = "http://vault.gitlab.m1xxos.tech"
 }
