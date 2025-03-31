@@ -70,3 +70,14 @@ provider "argocd" {
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
+
+provider "vault" {
+  address = var.vault_url
+  auth_login {
+    path = "auth/userpass/login/${var.vault_login_username}"
+
+    parameters = {
+      password = var.vault_login_password
+    }
+  }
+}
