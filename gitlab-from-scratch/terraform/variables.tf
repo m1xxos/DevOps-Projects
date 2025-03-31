@@ -28,11 +28,16 @@ variable "charts_path" {
 }
 
 variable "cloudflare_zone_id" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "cloudflare_api_token" {
-  type = string
+  type      = string
   sensitive = true
+}
+
+variable "main_domain" {
+  type = string
+  default = "gitlab.m1xxos.tech"
 }
