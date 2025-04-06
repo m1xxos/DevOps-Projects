@@ -34,6 +34,6 @@ resource "kubernetes_secret" "gitlab-cert-token" {
     namespace = "cert-manager"
   }
   data = {
-    "gitlab-vault-token" = vault_token.gitlab-cert-sa.client_token
+    "token" = vault_token.gitlab-cert-sa.client_token
   }
 }
