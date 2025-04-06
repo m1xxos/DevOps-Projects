@@ -11,16 +11,29 @@ path "kvv2/data/*" {
 EOT
 }
 
-resource "vault_token" "gitlab-vault-sa" {
-  policies = [vault_policy.gitlab-viewer.name]
+resource "vault_policy" "gitlab-cert-viewer" {
+  name   = "gitlab-cert-viewer"
+  policy = <<EOT
+path "kvv2${vault_kv_secret_v2.cloudflare-api-token-secret.name}" {
+  capabilities = ["read", "list"]
 }
 
-resource "kubernetes_secret" "gitlab-vault-token" {
+path "kvv2/data/${vault_kv_secret_v2.cloudflare-api-token-secret.name}" {
+  capabilities = ["read", "list"]
+}
+EOT
+}
+
+resource "vault_token" "gitlab-cert-sa" {
+  policies = [vault_policy.gitlab-cert-viewer.name]
+}
+
+resource "kubernetes_secret" "gitlab-cert-token" {
   metadata {
-    name      = "gitlab-vault"
-    namespace = "external-secrets"
+    name      = "gitlab-cert-token"
+    namespace = "cert-manager"
   }
   data = {
-    "gitlab-vault-token" = vault_token.gitlab-vault-sa.client_token
+    "gitlab-vault-token" = vault_token.gitlab-cert-sa.client_token
   }
 }
