@@ -20,5 +20,7 @@ resource "kubernetes_secret" "gitlab-vault-token" {
     name      = "gitlab-vault"
     namespace = "external-secrets"
   }
-  data = vault_token.gitlab-vault-sa.client_token
+  data = {
+    "gitlab-vault-token" = vault_token.gitlab-vault-sa.client_token
+  }
 }
