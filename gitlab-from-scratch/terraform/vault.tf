@@ -27,3 +27,4 @@ resource "yandex_kubernetes_marketplace_helm_release" "vault" {
     "server.extraEnvironmentVars.YANDEXCLOUD_KMS_KEY_ID" = yandex_kms_symmetric_key.vault-key.id
   }
 }
+
