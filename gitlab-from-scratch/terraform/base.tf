@@ -108,11 +108,30 @@ resource "yandex_vpc_security_group" "gitlab-cluster-traffic" {
     protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    description    = "Allow webhook validation traffic"
+    protocol       = "TCP"
+    port           = 443
+    v4_cidr_blocks = ["10.96.0.0/16", "10.112.0.0/16"]
+  }
   egress {
     description    = "Правило для исходящего трафика, разрешающее передачу трафика между мастером и подами metric-server."
     port           = 4443
     protocol       = "TCP"
     v4_cidr_blocks = ["10.96.0.0/16"]
+  }
+  egress {
+    description    = "Allow outbound connections to webhook services"
+    protocol       = "TCP"
+    port           = 443
+    v4_cidr_blocks = ["10.96.0.0/16", "10.112.0.0/16"]
+  }
+  egress {
+    description    = "Allow outbound connections on additional webhook ports"
+    protocol       = "TCP"
+    from_port      = 8000
+    to_port        = 9999
+    v4_cidr_blocks = ["10.96.0.0/16", "10.112.0.0/16"]
   }
 }
 
