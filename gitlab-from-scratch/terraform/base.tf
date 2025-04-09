@@ -67,6 +67,13 @@ resource "yandex_vpc_security_group" "gitlab-cluster-nodegroup-traffic" {
     protocol          = "ANY"
     predefined_target = "self_security_group"
   }
+
+  ingress {
+    from_port      = 0
+    to_port        = 65535
+    protocol       = "TCP"
+    v4_cidr_blocks = ["10.96.0.0/16", "10.112.0.0/16"]
+  }
 }
 
 resource "yandex_vpc_security_group" "gitlab-nodegroup-traffic" {
