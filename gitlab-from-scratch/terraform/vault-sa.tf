@@ -31,7 +31,7 @@ resource "vault_token" "gitlab-cert-sa" {
 resource "kubernetes_secret" "gitlab-cert-token" {
   metadata {
     name      = "gitlab-cert-token"
-    namespace = "external-secrets"
+    namespace = "cert-manager"
   }
   data = {
     "token" = vault_token.gitlab-cert-sa.client_token
